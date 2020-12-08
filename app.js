@@ -2,7 +2,7 @@
 var express = require('express')
 var app = express()
 
-var package_file = require('./package.json')
+var package_file = require('./SimpleAPI/package.json')
 
 app.get('/servers', function(req, res) {
     res.send([{name:'test-server'}, {name:'beta-server1'}])
