@@ -18,41 +18,41 @@ let users = [
 ]
 
 app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended : true }))
+app.use(bodyParser.urlencoded({ extended: true }))
 
-app.get('/', (req, res) => { 
-    res.send('Hello World!\n')
+app.get('/', (req, res) => {
+  res.send('Hello World!\n')
 })
 
 app.get('/users', (req, res) => res.json(users))
 
 app.get('/users/:id', (req, res) => {
   const id = parseInt(req.params.id, 10)
-  
-  if(!id){
-    return res.status(400).json({error : 'Incorrect ID'})
+
+  if (!id) {
+    return res.status(400).json({ error: 'Incorrect ID' })
   }
-    
+
   let user = users.filter(user => user.id === id)[0]
-  if(!user){
-    return res.status(404).json({error : 'Unknown User'})
+  if (!user) {
+    return res.status(404).json({ error: 'Unknown User' })
   }
-        
+
   return res.status(200).json(user)
-    
+
 });
 
 app.delete('/users/:id', (req, res) => {
   const id = parseInt(req.params.id, 10)
 
-  if(!id){
-    return res.status(400).json({error : 'Incorrect ID'})
+  if (!id) {
+    return res.status(400).json({ error: 'Incorrect ID' })
   }
 
   const userIdx = users.findIndex(user => user.id === id)
 
-  if(userIdx === -1){
-    return res.status(404).json({error : 'Unknown User'})
+  if (userIdx === -1) {
+    return res.status(404).json({ error: 'Unknown User' })
   }
 
   users.slice(userIdx, 1)
@@ -62,8 +62,8 @@ app.delete('/users/:id', (req, res) => {
 app.post('/users', (req, res) => {
   const name = req.body.name || ''
 
-  if(!name.length){
-    return res.status(400).json({ error : 'Incorrect name'})
+  if (!name.length) {
+    return res.status(400).json({ error: 'Incorrect name' })
   }
 
   const id = users.reduce((maxId, user) => {
@@ -72,7 +72,7 @@ app.post('/users', (req, res) => {
 
   const newUser = {
     id: id,
-    name : name
+    name: name
   }
 
   users.push(newUser)
