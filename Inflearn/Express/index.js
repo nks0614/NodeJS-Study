@@ -29,8 +29,20 @@ const app = express()
 // app.use(errorMw)
 // app.use(morgan('dev')) //외부 미들웨어, morgan
 
+let users = [
+    {id : 1, name : 'Alice'},
+    {id : 2, name : 'John'},
+    {id : 3, name : 'Tom'},
+]
+
+app.use(morgan('dev'))
+
 app.get('/', (req, res) => {
     res.send('Hello World')
+})
+
+app.get('/users', (req, res) => {
+    res.json(users)
 })
 
 app.listen(3000, () => {
