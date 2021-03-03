@@ -1,3 +1,4 @@
+const { request } = require('express')
 const express = require('express')
 const morgan = require('morgan')
 const app = express()
@@ -42,7 +43,18 @@ app.get('/', (req, res) => {
 })
 
 app.get('/users', (req, res) => {
-    res.json(users)
+    let limit
+    if(req.query.limit === undefined){
+        limit = 10
+    }else{
+        limit = parseInt(req.query.limit, 10)
+    }
+    
+    if(Number.isNaN(limit)){
+        return res.status(400).end()
+    }
+
+    res.json(users.slice(0, limit))
 })
 
 app.listen(3000, () => {
