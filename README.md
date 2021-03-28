@@ -37,4 +37,6 @@ Node.js에 대해서 공부하는 레포지토리
 - should
 - SuperTest
 
-급식, 사용자 조회 API
+이제 실전으로 옮길 차례
+
+
